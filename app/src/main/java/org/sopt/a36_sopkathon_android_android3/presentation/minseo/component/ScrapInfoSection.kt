@@ -1,5 +1,6 @@
 package org.sopt.a36_sopkathon_android_android3.presentation.minseo.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -24,16 +25,23 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Gray
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.presentation.minseo.ScrapInfo
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.colors
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.typography
 
 
 @Composable
@@ -43,43 +51,66 @@ fun ScrapInfoSection(
 ) {
     Row(
         modifier = modifier
-            .border(width = 1.dp, color = Gray, shape = RoundedCornerShape(15.dp))
+            .background(color = colors.white, shape = RoundedCornerShape(12.dp))
             .padding(horizontal = 16.dp, vertical = 14.dp)
             .fillMaxWidth()
     ){
         AsyncImage(
             model = scrapInfo.imageUrl,
             contentDescription = null,
-            modifier = Modifier.size(75.dp),
+            modifier = Modifier
+                .clip(RoundedCornerShape(8.dp))
+                .size(75.dp),
             contentScale = ContentScale.Crop
         )
-        Spacer(modifier = Modifier.width(22.dp))
+        Spacer(modifier = Modifier.width(16.dp))
 
         Column{
             Text(
-                text = scrapInfo.location
+                text = scrapInfo.location,
+                style = typography.body_spc_12,
+                color = colors.dark
             )
             Text(
-                text = scrapInfo.foodTitle
+                text = scrapInfo.foodTitle,
+                style = typography.head_spc_16,
+                color = colors.dark
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(12.dp))
+
             Row {
                 Text(
-                    text = "난이도: " + scrapInfo.level,
-                    modifier = Modifier.padding(end = 8.dp)
+                    text = "난이도: ",
+                    modifier = Modifier.padding(end = 8.dp),
+                    style = typography.body_spc_12,
+                    color = colors.light
                 )
+                Text(
+                    text = scrapInfo.level,
+                    style = typography.body_spc_12,
+                    color = colors.dark
+                )
+                Spacer(modifier = Modifier.width(16.dp))
 
                 Text(
-                    text = "시간: " + scrapInfo.time
+                    text = "시간: ",
+                    style = typography.body_spc_12,
+                    color = colors.light
+                )
+                Text(
+                    text = scrapInfo.time,
+                    style = typography.caption_12R,
+                    color = colors.dark
                 )
             }
         }
         Spacer(modifier = Modifier.weight(1f))
 
         Icon(
-            imageVector = Icons.Default.KeyboardArrowLeft,
+            imageVector = ImageVector.vectorResource(R.drawable.ic_home_hangari),
             contentDescription = null,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(24.dp),
+            tint = colors.dark
         )
     }
 }

@@ -8,7 +8,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 
 object ApiFactory {
-    private val BASE_URL: String = "https://test.com"
+    private val BASE_URL: String = "http://mooserver.site/"
     private val json = Json {
         ignoreUnknownKeys = true
     }
@@ -34,4 +34,5 @@ object ApiFactory {
 object ServicePool {
     val exampleService = ApiFactory.create<ExampleService>()
     val dongminService = ApiFactory.create<DongminService>()
+    val minseoService = ApiFactory.create<MinseoService>()
 }
