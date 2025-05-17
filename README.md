@@ -12,7 +12,7 @@
 <br>
 
 ### 3. 팀원 역할 분담 
-|👑 송민서<br/>([@MinseoSONG](https://github.com/MinseoSONG)) | 박동민<br/>([@chatymin](https://github.com/chattymin)) | 송주완<br/>([@0se0](https://github.com/vvan2)) | 송지우<br/>([@JiWoo1261](https://github.com/JiWoo1261)) |
+|👑 송민서<br/>([@MinseoSONG](https://github.com/MinseoSONG)) | 박동민<br/>([@chatymin](https://github.com/chattymin)) | 손주완<br/>([@vvan2](https://github.com/vvan2)) | 송지우<br/>([@JiWoo1261](https://github.com/JiWoo1261)) |
 |:---------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------:|
 | <img width="200px" src="https://avatars.githubusercontent.com/u/105851903?v=4"/> | <img width="200px" src="https://avatars.githubusercontent.com/u/52882799?v=4"/> | <img width="200px" src="https://avatars.githubusercontent.com/u/113279387?v=4"/> | <img width="200px" src="https://avatars.githubusercontent.com/u/133748256?v=4"/> |
 |`스플래시`<br/>`스크랩` | `장독대 뽑기` | `지역 선택` | `레시피-스마트스토어` |
