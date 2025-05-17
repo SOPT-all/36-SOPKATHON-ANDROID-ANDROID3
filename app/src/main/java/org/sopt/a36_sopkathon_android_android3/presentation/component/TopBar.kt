@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
@@ -26,11 +27,12 @@ fun TopBar(
     topBarText: String,
     onClickBack: () -> Unit,
     modifier: Modifier = Modifier,
+    horizontalPadding: Dp = 16.dp,
     trailingIconVisible: Boolean = false,
 ) {
     Row(
         modifier = modifier
-            .padding(vertical = 10.dp, horizontal = 16.dp)
+            .padding(vertical = 10.dp, horizontal = horizontalPadding)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
