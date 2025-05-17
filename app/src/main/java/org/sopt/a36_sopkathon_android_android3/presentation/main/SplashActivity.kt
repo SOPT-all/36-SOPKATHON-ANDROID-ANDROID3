@@ -123,8 +123,8 @@ private fun SplashScreen(
                     Text(
                         text = "해무라",
                         color = Color(0xFF000000),
-                        modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        style = HaeMuraTheme.typography.head_spc_24
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))

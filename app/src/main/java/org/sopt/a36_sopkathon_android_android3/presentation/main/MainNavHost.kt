@@ -32,7 +32,7 @@ fun MainNavHost(
 
             composable(route = "dongmin") {
                 DongminRoute(
-                    navigateToMinseo = { navController.navigateToMinseo() }
+                    navigateToMinseo = { navController.navigateToJiwoo() }
                 )
             }
 

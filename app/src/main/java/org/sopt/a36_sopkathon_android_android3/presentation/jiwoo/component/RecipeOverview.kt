@@ -1,5 +1,6 @@
 package org.sopt.a36_sopkathon_android_android3.presentation.jiwoo.component
 
+import android.R.attr.contentDescription
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,6 +13,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import org.sopt.a36_sopkathon_android_android3.R
+import org.sopt.a36_sopkathon_android_android3.core.ext.noRippleClickable
 import org.sopt.a36_sopkathon_android_android3.presentation.component.StarCount
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.colors
@@ -36,6 +42,8 @@ fun RecipeOverview(
     time: String,
     modifier: Modifier = Modifier
 ) {
+    var isScrap by remember { mutableStateOf(false) }
+
     Column(
         modifier = modifier.fillMaxWidth()
     ){
@@ -78,8 +86,19 @@ fun RecipeOverview(
             Spacer(modifier = Modifier.weight(1f))
             Row {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_scrap),
-                    contentDescription = null
+                    imageVector = ImageVector.vectorResource(id =
+                        if (isScrap) {
+                            R.drawable.ic_home_hangari
+                        } else {
+                            R.drawable.ic_home_scrap
+                        }
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(24.dp)
+                        .noRippleClickable {
+                            isScrap = !isScrap
+                        }
                 )
                 Spacer(modifier = Modifier.width(10.dp))
 

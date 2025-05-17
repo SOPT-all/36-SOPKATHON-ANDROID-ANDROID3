@@ -320,6 +320,7 @@ private fun StoryDialog(
                             .clip(RoundedCornerShape(8.dp))
                             .background(HaeMuraTheme.colors.primary)
                             .clickable {
+                                onDismissRequest()
                                 onRecipe()
                             }
                             .weight(1f)

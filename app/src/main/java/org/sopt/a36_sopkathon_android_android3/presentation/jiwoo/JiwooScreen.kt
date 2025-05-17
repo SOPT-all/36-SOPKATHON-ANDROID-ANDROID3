@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -26,8 +27,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import org.sopt.a36_sopkathon_android_android3.R
+import org.sopt.a36_sopkathon_android_android3.presentation.component.LoadingIcons
 import org.sopt.a36_sopkathon_android_android3.presentation.component.StarCount
 import org.sopt.a36_sopkathon_android_android3.presentation.component.TopBar
 import org.sopt.a36_sopkathon_android_android3.presentation.jiwoo.component.IngredientCard
@@ -40,20 +43,31 @@ import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.typography
 @Composable
 fun JiwooRoute(
     navigateToJuwan: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: JiwooViewModel = viewModel(),
 ) {
-    val jiwooData = JiwooViewModel().jiwooData
-    JiwooScreen(
-        jiwooData = jiwooData,
-        navigateToJuwan = navigateToJuwan
-    )
+    val jiwooData = viewModel.state
+    val isLoading = viewModel.isLoading
+
+    if (isLoading) {
+        LoadingIcons(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(HaeMuraTheme.colors.bg)
+        )
+    } else {
+        JiwooScreen(
+            jiwooData = jiwooData,
+            navigateToJuwan = navigateToJuwan
+        )
+    }
 }
 
 @Composable
 private fun JiwooScreen(
-    jiwooData: JiwooData = JiwooViewModel().jiwooData,
+    jiwooData: RecipeData,
     navigateToJuwan: () -> Unit = {},
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
@@ -61,7 +75,7 @@ private fun JiwooScreen(
             .fillMaxSize()
     ) {
         TopBar(
-            topBarText = jiwooData.recipe_title,
+            topBarText = jiwooData.recipeTitle,
             onClickBack = navigateToJuwan,
             trailingIconVisible = true
         )
@@ -69,7 +83,7 @@ private fun JiwooScreen(
         LazyColumn {
             item {
                 AsyncImage(
-                    model = jiwooData.thumbnail_image,
+                    model = jiwooData.thumbnailImage,
                     contentDescription = "음식 이미지",
                     modifier = Modifier
                         .height(226.dp)
@@ -80,12 +94,12 @@ private fun JiwooScreen(
             item {
                 Spacer(modifier = Modifier.height(20.dp))
                 RecipeOverview(
-                    ownerImageUrl = jiwooData.owner_image,
-                    ownerName = jiwooData.owner_name,
-                    ownerResidence = jiwooData.owner_residence,
-                    recipeTitle = jiwooData.recipe_title,
-                    difficulty = jiwooData.recipe_level,
-                    time = jiwooData.recipe_time,
+                    ownerImageUrl = jiwooData.ownerImage,
+                    ownerName = jiwooData.ownerName,
+                    ownerResidence = jiwooData.ownerResidence,
+                    recipeTitle = jiwooData.recipeTitle,
+                    difficulty = jiwooData.recipeLevel,
+                    time = jiwooData.recipeTime,
                     modifier = Modifier.padding(horizontal = 16.dp)
                 )
             }
@@ -99,18 +113,18 @@ private fun JiwooScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = jiwooData.recipe_story_title,
+                        text = jiwooData.recipeSmallTitle,
                         style = typography.body_14R,
                         color = colors.dark
                     )
                     Text(
-                        text = jiwooData.recipe_story,
+                        text = jiwooData.recipeStory,
                         style = typography.body_14R,
                         color = Color(0xFF6B331D)
                     )
                 }
             }
-            //특산물
+            // 특산물
             item {
                 Column(
                     Modifier
@@ -124,31 +138,25 @@ private fun JiwooScreen(
                         style = typography.head_spc_16,
                         color = colors.dark
                     )
+
                     Spacer(modifier = Modifier.height(12.dp))
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
-                        IngredientItem(
-                            imageUrl = R.drawable.img_home_15,
-                            ingredientName = "마른 미역",
-                            ingredientAmount = "10g"
-                        )
-                        IngredientItem(
-                            imageUrl = R.drawable.img_home_15,
-                            ingredientName = "들기름",
-                            ingredientAmount = "10g"
-                        )
-                        IngredientItem(
-                            imageUrl = R.drawable.img_home_15,
-                            ingredientName = "들기름",
-                            ingredientAmount = "10g"
-                        )
+                        jiwooData.localIngredients.forEach {
+                            IngredientItem(
+                                imageUrl = it.localIngredientsImage,
+                                ingredientName = it.ingredientName,
+                                ingredientAmount = it.ingredientAmount
+                            )
+                        }
                     }
                 }
-
             }
+            // 레시피
             item {
                 Column(
                     Modifier
@@ -175,19 +183,16 @@ private fun JiwooScreen(
                                 color = colors.dark,
                                 modifier = Modifier.padding(end = 16.dp)
                             )
-
                             Text(
                                 text = recipe,
                                 style = typography.body_14R,
                                 color = colors.dark
                             )
                         }
-
                     }
-
                 }
             }
-            //리뷰
+            // 리뷰
             item {
                 Column(
                     modifier = Modifier
@@ -206,7 +211,6 @@ private fun JiwooScreen(
                             color = colors.dark
                         )
                         Spacer(modifier = Modifier.weight(1f))
-
                         Text(
                             text = "전체보기",
                             style = typography.caption_12R,
@@ -219,12 +223,16 @@ private fun JiwooScreen(
                     }
                     Spacer(modifier = Modifier.height(20.dp))
 
-                    Column (
+                    Column(
                         modifier = Modifier
-                            .border(width = 1.dp, color = colors.light, shape = RoundedCornerShape(8.dp))
+                            .border(
+                                width = 1.dp,
+                                color = colors.light,
+                                shape = RoundedCornerShape(8.dp)
+                            )
                             .padding(12.dp)
                             .fillMaxWidth()
-                    ){
+                    ) {
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically
@@ -236,21 +244,19 @@ private fun JiwooScreen(
                                     .padding(end = 8.dp)
                                     .size(24.dp)
                             )
-                            
                             Text(
                                 text = "무라무라",
                                 style = typography.head_spc_16,
                                 color = colors.dark
                             )
                             Spacer(modifier = Modifier.weight(1f))
-
                             StarCount(5)
                         }
                         Spacer(modifier = Modifier.height(12.dp))
 
                         Row(
                             modifier = Modifier.fillMaxWidth()
-                        ){
+                        ) {
                             Image(
                                 painter = painterResource(R.drawable.img_home_15),
                                 contentDescription = null,
@@ -259,7 +265,6 @@ private fun JiwooScreen(
                                 contentScale = ContentScale.Crop
                             )
                             Spacer(modifier = Modifier.width(12.dp))
-
                             Text(
                                 text = "해무라 보고 처음 미역국 끓여봤는데 진짜 맛있었어요. 간단한 재료로도 국물이 깊고 고소해서 깜짝 놀랐어요!",
                                 style = typography.body_14R,
@@ -269,6 +274,8 @@ private fun JiwooScreen(
                     }
                 }
             }
+
+            // 추천 아이템
             item {
                 Column(
                     modifier = Modifier
@@ -286,34 +293,18 @@ private fun JiwooScreen(
 
                     LazyRow(
                         modifier = Modifier.fillMaxWidth()
-                    ){
-                        items(
-                            count = 3,
-                        ) {
+                    ) {
+                        items(jiwooData.recommends) { item ->
                             IngredientCard(
-                                recommendImg = R.drawable.img_home_15,
-                                recommendShopName = "바다숨",
-                                recommendName = "해녀가 건진 맑은 미역",
-                                recommendPrice = "3,900원"
-                            )
-                            IngredientCard(
-                                recommendImg = R.drawable.img_home_1,
-                                recommendShopName = "들소방앗간",
-                                recommendName = "해녀가 건진 맑은 미역",
-                                recommendPrice = "3,900원"
-                            )
-                            IngredientCard(
-                                recommendImg = R.drawable.img_home_2,
-                                recommendShopName = "바다숨",
-                                recommendName = "해녀가 건진 맑은 미역",
-                                recommendPrice = "3,900원"
+                                recommendImg = item.recommendImg,
+                                recommendShopName = item.recommendStore,
+                                recommendName = "",
+                                recommendPrice = "${item.recommendItemPrice}원"
                             )
                         }
                     }
                 }
             }
-
-
         }
     }
 }
@@ -323,6 +314,7 @@ private fun JiwooScreen(
 private fun PreviewJiwooScreen() {
     HaeMuraTheme {
         JiwooScreen(
+            jiwooData = RecipeData(),
             navigateToJuwan = {}
         )
     }
