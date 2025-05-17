@@ -90,5 +90,11 @@
 - 머지 전후로 빌드 돌려서 이상없는지 확인하기
 
 ### **7. 안드로이드 팀원들의 사진(before)**   
-![image](https://github.com/user-attachments/assets/8721620b-e636-4629-982a-74024453d73c)
+ <img width="480px" src="https://github.com/user-attachments/assets/8721620b-e636-4629-982a-74024453d73c"/>
+
+
+### **8. 안드로이드 팀원들의 사진(after)**   
+ <img width="480px" src="https://github.com/user-attachments/assets/50e4f7ba-2569-4aa0-8fc6-0afd4ebe8bfd"/>
+
+
 
