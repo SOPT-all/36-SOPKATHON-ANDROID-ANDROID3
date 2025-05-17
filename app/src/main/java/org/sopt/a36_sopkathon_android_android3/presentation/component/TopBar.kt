@@ -52,7 +52,7 @@ fun TopBar(
             Spacer(modifier = Modifier.weight(1f))
 
             Icon(
-                imageVector = Icons.Default.KeyboardArrowLeft,
+                imageVector = ImageVector.vectorResource(R.drawable.ic_hamburger),
                 contentDescription = null
             )
         }
