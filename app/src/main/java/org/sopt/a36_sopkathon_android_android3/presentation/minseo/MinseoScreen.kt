@@ -62,6 +62,7 @@ private fun MinseoScreen(
     ) {
         TopBar(
             topBarText = "스크랩",
+            horizontalPadding = 0.dp,
             onClickBack = navigateToJiwoo
         )
 

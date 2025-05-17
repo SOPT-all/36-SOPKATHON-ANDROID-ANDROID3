@@ -4,79 +4,75 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class RecipeResponseDto(
-    @SerialName("code")
-    val code: Int,
-    @SerialName("Recipe")
-    val Recipe: Recipe,
-    @SerialName("message")
-    val message: String
-)
-
-@Serializable
-data class Recipe(
+data class RecipeDto(
     @SerialName("ingredients")
-    val ingredients: List<Ingredient>,
+    val ingredients: List<IngredientDto> = emptyList(),
     @SerialName("owner_id")
-    val owner_id: Int,
+    val ownerId: Int = 0,
     @SerialName("owner_image")
-    val owner_image: String,
+    val ownerImage: String = "",
     @SerialName("owner_name")
-    val owner_name: String,
+    val ownerName: String = "",
     @SerialName("owner_residence")
-    val owner_residence: String,
+    val ownerResidence: String = "",
     @SerialName("recipe_id")
-    val recipe_id: Int,
+    val recipeId: Int = 0,
     @SerialName("recipe_level")
-    val recipe_level: String,
+    val recipeLevel: Int = 0,
     @SerialName("recipe_scrap")
-    val recipe_scrap: Boolean,
+    val recipeScrap: Boolean = false,
     @SerialName("recipe_story")
-    val recipe_story: String,
+    val recipeStory: String = "",
     @SerialName("recipe_time")
-    val recipe_time: Int,
+    val recipeTime: String = "",
     @SerialName("recipe_title")
-    val recipe_title: String,
+    val recipeTitle: String = "",
+    @SerialName("local_ingredients")
+    val localIngredients: List<IngredientDto> = emptyList(),
     @SerialName("recommends")
-    val recommends: List<Recommend>,
+    val recommends: List<RecommendDto> = emptyList(),
     @SerialName("reviews")
-    val reviews: List<Review>,
+    val reviews: List<ReviewDto> = emptyList(),
+    @SerialName("recipe")
+    val recipe: List<String> = emptyList(),
     @SerialName("story_id")
-    val story_id: Int,
+    val storyId: Int = 0,
     @SerialName("thumbnail_image")
-    val thumbnail_image: String,
+    val thumbnailImage: String = "",
     @SerialName("thumbnail_url")
-    val thumbnail_url: String
+    val thumbnailUrl: String = ""
 )
 
 @Serializable
-data class Ingredient(
-    @SerialName("ingredient_amount")
-    val ingredient_amount: String,
-    @SerialName("ingredient_id")
-    val ingredient_id: Int,
-    @SerialName("ingredient_image")
-    val ingredient_image: String,
-    @SerialName("ingredient_name")
-    val ingredient_name: String
+data class IngredientDto(
+    @SerialName("local_ingredients_amount")
+    val ingredientAmount: String = "",
+    @SerialName("local_ingredients_id")
+    val ingredientId: Int = 0,
+    @SerialName("local_ingredients_name")
+    val ingredientName: String = "",
+    @SerialName("local_ingredients_image")
+    val localIngredientsImage: String = "",
 )
 
 @Serializable
-data class Review(
+data class ReviewDto(
     @SerialName("review_content")
-    val review_content: String,
+    val reviewContent: String = "",
     @SerialName("review_id")
-    val review_id: Int
+    val reviewId: Int = 0
 )
 
 @Serializable
-data class Recommend(
+data class RecommendDto(
     @SerialName("recommend_id")
-    val recommend_id: Int,
-    @SerialName("recomment_item_price")
-    val recomment_item_price: Int,
-    @SerialName("recoomend_img")
-    val recoomend_img: String,
-    @SerialName("recoomend_store_url")
-    val recoomend_store_url: String
+    val recommendId: Int = 0,
+    @SerialName("recommend_item_price")
+    val recommendItemPrice: Int = 0,
+    @SerialName("recommend_img")
+    val recommendImg: String = "",
+    @SerialName("recommend_store")
+    val recommendStore: String = "",
+    @SerialName("recommend_store_url")
+    val recommendStoreUrl: String = ""
 )

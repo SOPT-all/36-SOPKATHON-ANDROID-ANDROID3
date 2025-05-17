@@ -1,9 +1,6 @@
 package org.sopt.a36_sopkathon_android_android3.presentation.jiwoo.component
 
-import android.R.attr.top
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -12,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.colors
@@ -20,16 +16,16 @@ import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.typography
 
 @Composable
 fun IngredientItem(
-    imageUrl: Int,
+    imageUrl: String,
     ingredientName: String,
-    ingredientAmount: String
-    ){
+    ingredientAmount: String,
+) {
     Column(
         modifier = Modifier.padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(imageUrl),
+        AsyncImage(
+            model = imageUrl,
             contentDescription = "재료 이미지",
             modifier = Modifier
                 .size(54.dp)
