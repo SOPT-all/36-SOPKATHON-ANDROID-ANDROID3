@@ -100,10 +100,7 @@ private fun DongminScreen(
 
     if (isOpenDialog) {
         StoryDialog(
-            imageUrl = dialogState.imageUrl,
-            name = dialogState.name,
-            title = dialogState.title,
-            story = dialogState.story,
+            state = dialogState,
             onDismissRequest = {
                 isOpenDialog = false
             },
@@ -188,10 +185,7 @@ private fun DongminScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun StoryDialog(
-    imageUrl: String,
-    name: String,
-    title: String,
-    story: String,
+    state: DialogState,
     onDismissRequest: () -> Unit,
     onRetry: () -> Unit,
     onRecipe: () -> Unit,
@@ -216,7 +210,7 @@ private fun StoryDialog(
                     .padding(16.dp),
             ) {
                 AsyncImage(
-                    model = imageUrl,
+                    model = state.data.recipe_image,
                     contentDescription = null,
                     modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(8.dp)),
                 )
@@ -226,12 +220,12 @@ private fun StoryDialog(
                 )
 
                 Text(
-                    text = "경상북도 경산시 정평동",
+                    text = state.data.recipe_owner.recipe_owner_address,
                     style = HaeMuraTheme.typography.head_spc_16
                 )
 
                 Text(
-                    text = "마늘 미역국",
+                    text = state.data.recipe_name,
                     style = HaeMuraTheme.typography.head_spc_24
                 )
 
@@ -249,7 +243,7 @@ private fun StoryDialog(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
 
-                    StarCount(2)
+                    StarCount(state.data.recipe_level)
 
                     Spacer(modifier = Modifier.width(16.dp))
 
@@ -262,18 +256,28 @@ private fun StoryDialog(
                     Spacer(modifier = Modifier.width(8.dp))
 
                     Text(
-                        text = "35분",
+                        text = state.data.cooking_time,
                         style = HaeMuraTheme.typography.caption_12R,
                         color = HaeMuraTheme.colors.dark
                     )
                 }
 
                 Spacer(
+                    modifier = Modifier.height(20.dp)
+                )
+
+                Text(
+                    text = state.data.recipe_small_title,
+                    style = HaeMuraTheme.typography.body_spc_14,
+                    color = HaeMuraTheme.colors.dark
+                )
+
+                Spacer(
                     modifier = Modifier.height(8.dp)
                 )
 
                 Text(
-                    text = story,
+                    text = state.data.recipe_story,
                     modifier = Modifier.fillMaxWidth(),
                     maxLines = 4,
                     style = HaeMuraTheme.typography.body_14R,
