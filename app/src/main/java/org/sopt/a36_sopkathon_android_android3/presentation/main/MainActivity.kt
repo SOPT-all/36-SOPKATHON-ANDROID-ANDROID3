@@ -15,7 +15,7 @@ import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        // enableEdgeToEdge()
         setContent {
             HaeMuraTheme{
                 val navController = rememberNavController()

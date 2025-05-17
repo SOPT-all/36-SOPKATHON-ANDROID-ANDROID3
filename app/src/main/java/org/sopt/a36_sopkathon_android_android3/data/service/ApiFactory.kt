@@ -35,4 +35,5 @@ object ServicePool {
     val exampleService = ApiFactory.create<ExampleService>()
     val dongminService = ApiFactory.create<DongminService>()
     val minseoService = ApiFactory.create<MinseoService>()
+    val jiwooService = ApiFactory.create<JiwooService>()
 }
