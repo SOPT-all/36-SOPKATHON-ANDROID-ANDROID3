@@ -6,8 +6,10 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -16,18 +18,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.BasicAlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -36,12 +31,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow.Companion.Ellipsis
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
@@ -51,9 +47,8 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.core.ext.noRippleClickable
+import org.sopt.a36_sopkathon_android_android3.presentation.component.StarCount
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
-import java.lang.Math.PI
-import kotlin.math.sin
 
 @Composable
 fun DongminRoute(
@@ -105,10 +100,7 @@ private fun DongminScreen(
 
     if (isOpenDialog) {
         StoryDialog(
-            imageUrl = dialogState.imageUrl,
-            name = dialogState.name,
-            title = dialogState.title,
-            story = dialogState.story,
+            state = dialogState,
             onDismissRequest = {
                 isOpenDialog = false
             },
@@ -120,26 +112,13 @@ private fun DongminScreen(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(HaeMuraTheme.colors.bg),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
-        ) {
-            IconButton(
-                onClick = {
-                    // TODO: navitgateUp
-                    navigateToMinseo()
-                },
-            ) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowLeft,
-                    contentDescription = null
-                )
-            }
-        }
+        Spacer(modifier = Modifier)
 
         Image(
             painter = painterResource(R.drawable.jangdokdae),
@@ -197,20 +176,16 @@ private fun DongminScreen(
                 .clickable(
                     onClick = navigateToMinseo
                 )
-                .padding(bottom = 20.dp)
+                .padding(bottom = 20.dp),
+            style = HaeMuraTheme.typography.body_spc_14,
         )
-
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun StoryDialog(
-    imageUrl: String,
-    name: String,
-    title: String,
-    story: String,
+    state: DialogState,
     onDismissRequest: () -> Unit,
     onRetry: () -> Unit,
     onRecipe: () -> Unit,
@@ -222,74 +197,141 @@ private fun StoryDialog(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            shape = RoundedCornerShape(16.dp),
+                .padding(16.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(HaeMuraTheme.colors.card),
+            shape = RoundedCornerShape(12.dp),
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .clip(RoundedCornerShape(12.dp))
+                    .background(HaeMuraTheme.colors.card)
                     .padding(16.dp),
             ) {
                 AsyncImage(
-                    model = imageUrl,
+                    model = state.data.recipe_image,
                     contentDescription = null,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(8.dp)),
                 )
+
+                Spacer(
+                    modifier = Modifier.height(16.dp)
+                )
+
+                Text(
+                    text = state.data.recipe_owner.recipe_owner_address,
+                    style = HaeMuraTheme.typography.head_spc_16
+                )
+
+                Text(
+                    text = state.data.recipe_name,
+                    style = HaeMuraTheme.typography.head_spc_24
+                )
+
+                Spacer(
+                    modifier = Modifier.height(8.dp)
+                )
+
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Favorite,
-                        contentDescription = null,
-                        modifier = Modifier.padding(end = 8.dp),
+                    Text(
+                        text = "난이도",
+                        style = HaeMuraTheme.typography.body_spc_12,
+                        color = HaeMuraTheme.colors.light
                     )
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    StarCount(state.data.recipe_level)
+
+                    Spacer(modifier = Modifier.width(16.dp))
 
                     Text(
-                        text = name,
+                        text = "시간",
+                        style = HaeMuraTheme.typography.body_spc_12,
+                        color = HaeMuraTheme.colors.light
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp))
+
+                    Text(
+                        text = state.data.cooking_time,
+                        style = HaeMuraTheme.typography.caption_12R,
+                        color = HaeMuraTheme.colors.dark
                     )
                 }
 
-                Text(
-                    text = title,
-                    modifier = Modifier.fillMaxWidth()
-                )
-
                 Spacer(
                     modifier = Modifier.height(20.dp)
                 )
 
                 Text(
-                    text = story,
-                    modifier = Modifier.fillMaxWidth()
+                    text = state.data.recipe_small_title,
+                    style = HaeMuraTheme.typography.body_spc_14,
+                    color = HaeMuraTheme.colors.dark
                 )
 
                 Spacer(
-                    modifier = Modifier.height(20.dp)
+                    modifier = Modifier.height(8.dp)
+                )
+
+                Text(
+                    text = state.data.recipe_story,
+                    modifier = Modifier.fillMaxWidth(),
+                    maxLines = 4,
+                    style = HaeMuraTheme.typography.body_14R,
+                    overflow = Ellipsis
+                )
+
+                Spacer(
+                    modifier = Modifier.height(27.dp)
                 )
 
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Button(
-                        onClick = onRetry,
-                        modifier = Modifier.weight(1f)
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(HaeMuraTheme.colors.bg)
+                            .clickable {
+                                onRetry()
+                            }
+                            .weight(1f)
+                            .align(Alignment.CenterVertically)
                     ) {
                         Text(
-                            text = "다시"
+                            text = "다시 뽑기",
+                            style = HaeMuraTheme.typography.body_spc_14,
+                            color = HaeMuraTheme.colors.dark,
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .padding(9.dp)
                         )
                     }
 
                     Spacer(
-                        modifier = Modifier.width(20.dp)
+                        modifier = Modifier.width(14.dp)
                     )
 
-                    Button(
-                        onClick = onRecipe,
-                        modifier = Modifier.weight(1f)
+                    Box(
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(HaeMuraTheme.colors.primary)
+                            .clickable {
+                                onRecipe()
+                            }
+                            .weight(1f)
+                            .align(Alignment.CenterVertically)
                     ) {
                         Text(
-                            text = "레시피"
+                            text = "레시피 보러가기",
+                            style = HaeMuraTheme.typography.body_spc_14,
+                            color = HaeMuraTheme.colors.white,
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .padding(9.dp)
                         )
                     }
                 }

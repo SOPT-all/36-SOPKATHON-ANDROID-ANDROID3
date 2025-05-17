@@ -3,7 +3,7 @@ package org.sopt.a36_sopkathon_android_android3.data.util
 import org.sopt.a36_sopkathon_android_android3.data.dto.response.ApiResponse
 
 fun <T> ApiResponse<T>.handleApiResponse(): Result<T> {
-    return when (this.status) {
+    return when (this.code) {
         in 200..299 -> {
             if (this.data != null) {
                 Result.success(this.data)

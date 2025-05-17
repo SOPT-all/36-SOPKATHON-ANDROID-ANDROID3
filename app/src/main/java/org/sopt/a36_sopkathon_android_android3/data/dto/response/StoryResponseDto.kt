@@ -5,14 +5,39 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class StoryResponseDto(
-    @SerialName("storyId")
-    val storyId: Int,
-    @SerialName("imageUrl")
-    val imageUrl: String,
-    @SerialName("name")
-    val name: String,
-    @SerialName("title")
-    val title: String,
-    @SerialName("story")
-    val story: String,
-)
+    @SerialName("recipe_id")
+    val recipeId: Int,
+
+    @SerialName("recipe_image")
+    val recipeImage: String,
+
+    @SerialName("recipe_owner")
+    val recipeOwner: RecipeOwner,
+
+    @SerialName("recipe_name")
+    val recipeName: String,
+
+    @SerialName("recipe_small_title")
+    val recipeSmallTitle: String,
+
+    @SerialName("recipe_story")
+    val recipeStory: String,
+
+    @SerialName("recipe_level")
+    val recipeLevel: Int,
+
+    @SerialName("cooking_time")
+    val cookingTime: String
+) {
+    @Serializable
+    data class RecipeOwner(
+        @SerialName("recipe_owner_image")
+        val recipeOwnerImage: String,
+
+        @SerialName("recipe_owner_name")
+        val recipeOwnerName: String,
+
+        @SerialName("recipe_owner_address")
+        val recipeOwnerAddress: String
+    )
+}

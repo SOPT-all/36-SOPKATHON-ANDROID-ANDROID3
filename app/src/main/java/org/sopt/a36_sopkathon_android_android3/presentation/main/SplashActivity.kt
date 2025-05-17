@@ -3,7 +3,6 @@ package org.sopt.a36_sopkathon_android_android3.presentation.main
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
@@ -37,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
-
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity(): ComponentActivity() {
@@ -126,7 +124,8 @@ private fun SplashScreen(
                         text = "해무라",
                         color = Color(0xFF000000),
                         modifier = Modifier
-                            .align(Alignment.CenterHorizontally)
+                            .align(Alignment.CenterHorizontally),
+                        style = HaeMuraTheme.typography.head_spc_24
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
@@ -138,7 +137,7 @@ private fun SplashScreen(
 @Preview
 @Composable
 private fun SplashScreenPreview() {
-    HaeMuraTheme{
+    HaeMuraTheme {
         SplashScreen(
             onFinish = {}
         )
