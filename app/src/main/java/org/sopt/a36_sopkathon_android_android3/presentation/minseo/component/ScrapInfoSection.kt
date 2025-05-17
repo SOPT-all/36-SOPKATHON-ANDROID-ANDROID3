@@ -33,7 +33,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import org.sopt.a36_sopkathon_android_android3.presentation.minseo.ScrapInfo
-import org.sopt.a36_sopkathon_android_android3.ui.theme._36SOPKATHONANDROIDANDROID3Theme
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
+
 
 @Composable
 fun ScrapInfoSection(
@@ -86,7 +87,7 @@ fun ScrapInfoSection(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewScrapInfoSection() {
-    _36SOPKATHONANDROIDANDROID3Theme {
+    HaeMuraTheme {
         ScrapInfoSection(
             scrapInfo =
                 ScrapInfo(
