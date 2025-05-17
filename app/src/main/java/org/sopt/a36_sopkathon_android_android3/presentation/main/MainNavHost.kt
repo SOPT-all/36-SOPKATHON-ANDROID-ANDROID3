@@ -22,7 +22,7 @@ fun MainNavHost(
     ) {
         NavHost(
             navController = navController,
-            startDestination = "minseo"
+            startDestination = "dongmin"
         ) {
             composable(route = "minseo") {
                 MinseoRoute(
