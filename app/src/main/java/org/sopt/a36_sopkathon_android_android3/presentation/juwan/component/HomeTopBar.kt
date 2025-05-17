@@ -1,9 +1,12 @@
 package org.sopt.a36_sopkathon_android_android3.presentation.juwan.component
 
+import android.widget.Space
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
@@ -37,11 +40,13 @@ fun HomeTopBar(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_marker),
             contentDescription = null
         )
+        Spacer(modifier = Modifier.padding(start=10.dp))
         Text(
             text = "경상북도",
             style = HaeMuraTheme.typography.head_spc_16,
             color = HaeMuraTheme.colors.dark
         )
+        Spacer(modifier = Modifier.weight(1F))
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_hangari),
             contentDescription = "Scrap Icon",

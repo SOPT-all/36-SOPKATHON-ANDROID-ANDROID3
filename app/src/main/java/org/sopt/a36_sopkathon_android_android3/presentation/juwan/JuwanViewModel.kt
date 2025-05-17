@@ -70,7 +70,7 @@ class JuwanViewModel : ViewModel() {
         homeItem(
             homeId = "13",
             text = "영천",
-            image = R.drawable.img_home_13
+            image = R.drawable.img_home_re
         ),
         homeItem(
             homeId = "14",
