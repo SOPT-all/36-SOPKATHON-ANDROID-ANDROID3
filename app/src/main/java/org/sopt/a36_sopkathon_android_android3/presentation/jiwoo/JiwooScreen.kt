@@ -25,6 +25,7 @@ import org.sopt.a36_sopkathon_android_android3.presentation.jiwoo.component.Ingr
 import org.sopt.a36_sopkathon_android_android3.presentation.jiwoo.component.RecipeOverview
 import org.sopt.a36_sopkathon_android_android3.presentation.jiwoo.component.Review
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.colors
 
 @Composable
 fun JiwooRoute(
@@ -45,7 +46,9 @@ private fun JiwooScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier
+            .background(color = colors.bg)
+            .fillMaxSize()
     ) {
         TopBar(
             topBarText = jiwooData.recipe_title,
@@ -64,6 +67,7 @@ private fun JiwooScreen(
                 )
             }
             item {
+                Spacer(modifier = Modifier.height(20.dp))
                 RecipeOverview(
                     ownerImageUrl = jiwooData.owner_image,
                     ownerName = jiwooData.owner_name,
