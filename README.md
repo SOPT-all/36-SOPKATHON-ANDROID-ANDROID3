@@ -97,4 +97,7 @@
  <img width="480px" src="https://github.com/user-attachments/assets/50e4f7ba-2569-4aa0-8fc6-0afd4ebe8bfd"/>
 
 
+### **9. 시연영상**
+https://github.com/user-attachments/assets/2c1d74cc-a53f-44fc-aa06-51549333b037
+
 
