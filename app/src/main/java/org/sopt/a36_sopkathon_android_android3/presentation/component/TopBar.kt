@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,13 +20,15 @@ import org.sopt.a36_sopkathon_android_android3.ui.theme._36SOPKATHONANDROIDANDRO
 fun TopBar(
     topBarText: String,
     onClickBack: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    trailingIconVisible: Boolean = false,
 ) {
     Row(
         modifier = modifier
-            .padding(vertical = 10.dp, horizontal = 10.dp)
-            .fillMaxWidth()
-    ){
+            .padding(vertical = 10.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
         Icon(
             imageVector = Icons.Default.KeyboardArrowLeft,
             contentDescription = null,
@@ -36,12 +39,15 @@ fun TopBar(
             text = topBarText,
             modifier = Modifier.padding(start = 10.dp)
         )
-        Spacer(modifier = Modifier.weight(1f))
 
-        Icon(
-            imageVector = Icons.Default.KeyboardArrowLeft,
-            contentDescription = null
-        )
+        if (trailingIconVisible) {
+            Spacer(modifier = Modifier.weight(1f))
+
+            Icon(
+                imageVector = Icons.Default.KeyboardArrowLeft,
+                contentDescription = null
+            )
+        }
     }
 }
 
