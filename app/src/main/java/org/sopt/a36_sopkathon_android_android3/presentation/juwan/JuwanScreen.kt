@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.presentation.juwan.component.HomeCardView
 import org.sopt.a36_sopkathon_android_android3.presentation.juwan.component.HomeTopBar
 import org.sopt.a36_sopkathon_android_android3.presentation.juwan.component.SearchBar
@@ -42,16 +43,19 @@ private fun JuwanScreen(
 
     Column(
         modifier = Modifier
-            .padding(start = 12.dp, end = 12.dp)
-            .background(color =colors.bg)
+            .background(color = colors.bg)
+            .padding(start = 16.dp, end = 16.dp)
             .fillMaxSize()
 
     ) {
         HomeTopBar()
+        Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "해무리의 장독대\n오늘은 어느 마을의 맛을 알아볼까요?",
-            style = HaeMuraTheme.typography.head_spc_24
+            text = "오늘은 어느 마을의 맛을\n열어볼까요?",
+            style = HaeMuraTheme.typography.head_spc_24,
+            color = colors.dark
         )
+        Spacer(modifier = Modifier.height(15.dp))
         SearchBar(value = "")
 
         Spacer(modifier = Modifier.height(21.dp))
@@ -60,12 +64,13 @@ private fun JuwanScreen(
             columns = GridCells.Fixed(3),
             modifier = modifier
                 .fillMaxSize()
+//                .weight(1f)
                 .padding(start = 15.dp, end = 15.dp),
             horizontalArrangement = Arrangement.spacedBy(11.dp),
             verticalArrangement = Arrangement.spacedBy(11.dp)
 
         ) {
-            items(homeList.size){ index ->
+            items(homeList.size) { index ->
                 HomeCardView(
                     homeItem = homeList[index]
                 )
@@ -75,31 +80,28 @@ private fun JuwanScreen(
     }
 
 
-
-
-
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun PreviewJuwanScreen() {
-   HaeMuraTheme {
+    HaeMuraTheme {
         JuwanScreen(
             homeList = listOf(
                 homeItem(
                     homeId = "1",
                     text = "상주",
-                    imageUrl = "https://image.tving.com/ntgs/contents/CTC/caip/CAIP0900/ko/20240814/1707/P001760343.jpg/dims/resize/F_webp,400"
+                    image = R.drawable.img_home_1
                 ),
                 homeItem(
                     homeId = "2",
                     text = "의성",
-                    imageUrl = "https://image.tving.com/ntgs/contents/CTC/caip/CAIP0900/ko/20240814/1707/P001760343.jpg/dims/resize/F_webp,400"
+                    image = R.drawable.img_home_2
                 ),
                 homeItem(
                     homeId = "3",
                     text = "안동",
-                    imageUrl = "https://image.tving.com/ntgs/contents/CTC/caip/CAIP0900/ko/20240814/1707/P001760343.jpg/dims/resize/F_webp,400"
+                    image = R.drawable.img_home_3
                 )
             ),
             navigateToDongmin = {}

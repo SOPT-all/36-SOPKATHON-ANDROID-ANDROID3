@@ -17,6 +17,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.a36_sopkathon_android_android3.R
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
 
 
 @Composable
@@ -31,14 +32,16 @@ fun HomeTopBar(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(id= R.drawable.ic_home_local),
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_marker),
             contentDescription = null
         )
         Text(
-            text = "경상북도"
+            text = "경상북도",
+            style = HaeMuraTheme.typography.head_spc_16,
+            color = HaeMuraTheme.colors.dark
         )
         Icon(
-            imageVector = ImageVector.vectorResource(id= R.drawable.ic_home_scrap),
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_hangari),
             contentDescription = "Scrap Icon"
         )
 
