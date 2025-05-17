@@ -38,6 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import org.sopt.a36_sopkathon_android_android3.R
+import org.sopt.a36_sopkathon_android_android3.presentation.component.StarCount
 import org.sopt.a36_sopkathon_android_android3.presentation.minseo.ScrapInfo
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.colors
@@ -85,11 +86,7 @@ fun ScrapInfoSection(
                     style = typography.body_spc_12,
                     color = colors.light
                 )
-                Text(
-                    text = scrapInfo.level,
-                    style = typography.body_spc_12,
-                    color = colors.dark
-                )
+                StarCount(scrapInfo.level)
                 Spacer(modifier = Modifier.width(16.dp))
 
                 Text(
@@ -125,7 +122,7 @@ private fun PreviewScrapInfoSection() {
                     imageUrl = "https://image.tving.com/ntgs/contents/CTC/caip/CAIP0900/ko/20240814/1707/P001760343.jpg/dims/resize/F_webp,400",
                     foodTitle = "들기름 막국수",
                     location = "경북 의성군 금성면",
-                    level = "⭐️",
+                    level = 1,
                     time = "⭐️⭐️⭐️"
                 )
 

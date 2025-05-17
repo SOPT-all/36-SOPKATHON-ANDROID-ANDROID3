@@ -23,7 +23,7 @@ class MinseoViewModel : ViewModel() {
                         imageUrl = dto.thumbnail_image,
                         foodTitle = dto.recipe_name,
                         location = dto.recipe_owner_address,
-                        level = dto.recipe_level.toString(),
+                        level = dto.recipe_level,
                         time = dto.recipe_time
                     )
                 }?.let { mappedList ->
@@ -41,6 +41,6 @@ class MinseoViewModel : ViewModel() {
         val imageUrl: String,
         val foodTitle: String,
         val location: String,
-        val level: String,
+        val level: Int,
         val time: String
     )
