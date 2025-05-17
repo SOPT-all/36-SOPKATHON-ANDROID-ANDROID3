@@ -14,7 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.sopt.a36_sopkathon_android_android3.ui.theme._36SOPKATHONANDROIDANDROID3Theme
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
+
 
 @Composable
 fun TopBar(
@@ -54,7 +55,7 @@ fun TopBar(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewTopBar() {
-    _36SOPKATHONANDROIDANDROID3Theme {
+    HaeMuraTheme {
         TopBar(
             topBarText = "TopBar",
             onClickBack = {}
