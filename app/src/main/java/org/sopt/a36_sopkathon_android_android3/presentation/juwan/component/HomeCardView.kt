@@ -3,14 +3,9 @@ package org.sopt.a36_sopkathon_android_android3.presentation.juwan.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -23,8 +18,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.presentation.juwan.homeItem
-import org.sopt.a36_sopkathon_android_android3.presentation.minseo.ScrapInfo
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.colors
 
 
@@ -36,7 +32,7 @@ fun HomeCardView(
 
     Column(
         modifier = modifier
-            .border(width = 1.dp, color =Color.Gray, shape = RoundedCornerShape(10.dp))
+            .border(width = 1.dp, color = Color.Transparent, shape = RoundedCornerShape(10.dp))
             .background(colors.white)
             .padding(horizontal = 20.dp, vertical = 18.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -44,17 +40,18 @@ fun HomeCardView(
 
     ) {
         AsyncImage(
-            model = homeItem.imageUrl,
+            model = homeItem.image,
             contentDescription = homeItem.homeId,
             modifier = Modifier
                 .size(60.dp)
-                .clip(CircleShape)
-            ,
+                .clip(CircleShape),
             contentScale = ContentScale.Crop
         )
 
         Text(
             text = homeItem.text,
+            style = HaeMuraTheme.typography.head_spc_16,
+            color = colors.dark
         )
     }
 
@@ -69,7 +66,7 @@ fun showCardView() {
             homeItem(
                 homeId = "1",
                 text = "상주",
-                imageUrl = "https://image.tving.com/ntgs/contents/CTC/caip/CAIP0900/ko/20240814/1707/P001760343.jpg/dims/resize/F_webp,400"
+                image = R.drawable.img_home_1
             )
     )
 }
