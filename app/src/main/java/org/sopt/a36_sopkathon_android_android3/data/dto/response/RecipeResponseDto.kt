@@ -45,11 +45,11 @@ data class RecipeDto(
 
 @Serializable
 data class IngredientDto(
-    @SerialName("ingredient_amount")
+    @SerialName("local_ingredients_amount")
     val ingredientAmount: String = "",
-    @SerialName("ingredient_id")
+    @SerialName("local_ingredients_id")
     val ingredientId: Int = 0,
-    @SerialName("ingredient_Name")
+    @SerialName("local_ingredients_name")
     val ingredientName: String = "",
     @SerialName("local_ingredients_image")
     val localIngredientsImage: String = "",

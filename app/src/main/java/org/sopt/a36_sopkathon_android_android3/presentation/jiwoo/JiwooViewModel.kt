@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.sopt.a36_sopkathon_android_android3.data.service.ServicePool
 import org.sopt.a36_sopkathon_android_android3.data.util.handleApiResponse
@@ -15,7 +13,9 @@ class JiwooViewModel : ViewModel() {
     val isLoading: Boolean
         get() = _isLoading.value
 
-    private var _jiwooData = MutableStateFlow(RecipeData())
+    private var _jiwooData = MutableStateFlow(RecipeData(
+        localIngredients = emptyList()
+    ))
     val state: RecipeData
         get() = _jiwooData.value
 
@@ -50,11 +50,12 @@ class JiwooViewModel : ViewModel() {
                         recipe = recipe.recipe,
                         reviews = recipe.reviews,
                         storyId = recipe.storyId,
+                        localIngredients = recipe.localIngredients,
                         thumbnailImage = recipe.thumbnailImage,
                         thumbnailUrl = recipe.thumbnailUrl
                     )
 
-                    // delay(2000)
+                    
                     _isLoading.value = false
                 }
             }

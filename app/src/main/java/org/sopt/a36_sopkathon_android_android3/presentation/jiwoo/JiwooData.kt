@@ -25,7 +25,7 @@ data class RecipeData(
     val recipeSmallTitle: String = "",
     val reviews: List<Review> = emptyList(),
     val recommends: List<Recommend> = emptyList(),
-    val localIngredients: List<Ingredient> = emptyList()
+    val localIngredients: List<Ingredient>
 )
 
 data class Ingredient(

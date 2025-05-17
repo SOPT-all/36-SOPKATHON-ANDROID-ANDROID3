@@ -1,5 +1,6 @@
 package org.sopt.a36_sopkathon_android_android3.presentation.jiwoo
 
+import android.R.attr.contentDescription
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -257,8 +258,9 @@ private fun JiwooScreen(
                         Row(
                             modifier = Modifier.fillMaxWidth()
                         ) {
-                            Image(
-                                painter = painterResource(R.drawable.img_home_15),
+                            AsyncImage(
+                                // painter = painterResource(R.drawable.img_home_15),
+                                model = jiwooData.thumbnailImage,
                                 contentDescription = null,
                                 modifier = Modifier
                                     .size(width = 66.dp, height = 80.dp),
@@ -266,7 +268,7 @@ private fun JiwooScreen(
                             )
                             Spacer(modifier = Modifier.width(12.dp))
                             Text(
-                                text = "해무라 보고 처음 미역국 끓여봤는데 진짜 맛있었어요. 간단한 재료로도 국물이 깊고 고소해서 깜짝 놀랐어요!",
+                                text = jiwooData.reviews.first().reviewContent,
                                 style = typography.body_14R,
                                 color = colors.dark
                             )
@@ -314,7 +316,9 @@ private fun JiwooScreen(
 private fun PreviewJiwooScreen() {
     HaeMuraTheme {
         JiwooScreen(
-            jiwooData = RecipeData(),
+            jiwooData = RecipeData(
+                localIngredients = emptyList()
+            ),
             navigateToJuwan = {}
         )
     }
