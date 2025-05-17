@@ -12,10 +12,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
-
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.colors
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.typography
 
 @Composable
 fun TopBar(
@@ -31,14 +35,17 @@ fun TopBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            imageVector = Icons.Default.KeyboardArrowLeft,
+            imageVector = ImageVector.vectorResource(R.drawable.ic_back),
             contentDescription = null,
-            modifier = Modifier.clickable { onClickBack() }
+            modifier = Modifier.clickable { onClickBack() },
+            tint = colors.dark
         )
 
         Text(
             text = topBarText,
-            modifier = Modifier.padding(start = 10.dp)
+            modifier = Modifier.padding(start = 10.dp, top = 12.dp, bottom = 12.dp),
+            style = typography.head_spc_16,
+            color = colors.dark
         )
 
         if (trailingIconVisible) {
