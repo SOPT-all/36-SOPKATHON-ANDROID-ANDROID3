@@ -1,21 +1,19 @@
 package org.sopt.a36_sopkathon_android_android3.presentation.dongmin
 
 
-import androidx.compose.foundation.background
+import androidx.compose.animation.core.Animatable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
@@ -33,16 +31,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import kotlinx.coroutines.launch
+import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.ui.theme._36SOPKATHONANDROIDANDROID3Theme
+import java.lang.Math.PI
+import kotlin.math.sin
 
 @Composable
 fun DongminRoute(
@@ -104,22 +107,44 @@ private fun DongminScreen(
         }
 
 
-        Box(
+        val shakeDegrees = remember { Animatable(0f) }
+        var isShaking by remember { mutableStateOf(false) }
+
+        Image(
+            painter = painterResource(R.drawable.hangari) ,
             modifier = Modifier
                 .size(200.dp)
-                .clip(CircleShape)
-                .background(Color.Black)
+                .graphicsLayer {
+                    rotationZ = shakeDegrees.value
+                }
                 .clickable(
                     onClick = {
-                        getDialogState()
-                        isOpenDialog = true
+                        if (!isShaking) {
+                            getDialogState()
+                            isShaking = true
+                            scope.launch {
+                                val duration = 2000
+                                val startTime = withFrameNanos { it }
+                                var time: Long
+                                do {
+                                    time = withFrameNanos { it }
+                                    val elapsed = (time - startTime) / 1_000_000 // to millis
+                                    val progress = elapsed / duration.toFloat()
+                                    val angle = sin(progress * 20 * PI).toFloat() * 10f // 흔들림: 주기 * 진폭
+                                    shakeDegrees.snapTo(angle)
+                                } while (elapsed < duration)
+                                shakeDegrees.snapTo(0f)
+                                isShaking = false
+                                isOpenDialog = true
+                            }
+                        }
                     }
-                )
+                ),
+            contentDescription = null
         )
 
-
         Text(
-            text = if (!isOpenDialog) "탭해서 특별한 레시피 보러가기" else "",
+            text = if (!isOpenDialog && !isShaking) "탭해서 특별한 레시피 보러가기" else "",
             modifier = Modifier
                 .clickable(
                     onClick = navigateToMinseo
