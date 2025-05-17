@@ -127,14 +127,14 @@ private fun PreviewMinseoScreen() {
                     imageUrl = "https://image.tving.com/ntgs/contents/CTC/caip/CAIP0900/ko/20240814/1707/P001760343.jpg/dims/resize/F_webp,400",
                     foodTitle = "들기름 막국수",
                     location = "경북 의성군 금성면",
-                    level = "⭐️",
+                    level = 1,
                     time = "⭐️⭐️⭐️"
                 ),
                 ScrapInfo(
                     imageUrl = "https://image.tving.com/ntgs/contents/CTC/caip/CAIP0900/ko/20240814/1707/P001760343.jpg/dims/resize/F_webp,400",
                     foodTitle = "들기름 막국수",
                     location = "경북 의성군 금성면",
-                    level = "⭐️",
+                    level = 2,
                     time = "⭐️⭐️⭐️"
                 )
             ),
