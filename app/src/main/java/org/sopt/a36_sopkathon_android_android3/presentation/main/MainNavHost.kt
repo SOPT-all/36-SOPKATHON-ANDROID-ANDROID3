@@ -22,7 +22,7 @@ fun MainNavHost(
     ) {
         NavHost(
             navController = navController,
-            startDestination = "dongmin"
+            startDestination = "juwan"
         ) {
             composable(route = "minseo") {
                 MinseoRoute(
@@ -44,7 +44,8 @@ fun MainNavHost(
 
             composable(route = "juwan") {
                 JuwanRoute(
-                    navigateToDongmin = { navController.navigateToDongmin() }
+                    navigateToDongmin = { navController.navigateToDongmin() },
+                    navigateToScrap = { navController.navigateToMinseo() },
                 )
             }
         }

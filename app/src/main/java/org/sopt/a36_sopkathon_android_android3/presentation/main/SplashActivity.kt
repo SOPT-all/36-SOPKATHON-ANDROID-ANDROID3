@@ -91,7 +91,7 @@ private fun SplashScreen(
                 enter = slideIn(
                     initialOffset = { fullSize -> IntOffset(fullSize.width, fullSize.height) },
                     animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing)
-                ) + fadeIn(animationSpec = tween(500))
+                )
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.fork),

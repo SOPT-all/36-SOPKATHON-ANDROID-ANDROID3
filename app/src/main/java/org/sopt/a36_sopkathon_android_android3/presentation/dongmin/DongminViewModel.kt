@@ -20,7 +20,20 @@ class DongminViewModel : ViewModel() {
 
             if (result.isSuccess) {
                 _dialogState.value = _dialogState.value.copy(
-                    data = result.getOrThrow().toStoryResponseModel()
+                    data = result.getOrNull()?.toStoryResponseModel() ?: StoryResponseModel(
+                        recipe_id = 0,
+                        recipe_image = "",
+                        recipe_owner = RecipeOwner(
+                            recipe_owner_image = "",
+                            recipe_owner_name = "",
+                            recipe_owner_address = ""
+                        ),
+                        recipe_name = "비상~~~",
+                        recipe_small_title = "오류발생~~~~~",
+                        recipe_story = "큰일이 났구요, 왜이런지 몰겠구요, 어떡하죠?큰일이 났구요, 왜이런지 몰겠구요, 어떡하죠?큰일이 났구요, 왜이런지 몰겠구요, 어떡하죠?큰일이 났구요, 왜이런지 몰겠구요, 어떡하죠?큰일이 났구요, 왜이런지 몰겠구요, 어떡하죠?큰일이 났구요, 왜이런지 몰겠구요, 어떡하죠?큰일이 났구요, 왜이런지 몰겠구요, 어떡하죠?큰일이 났구요, 왜이런지 몰겠구요, 어떡하죠?",
+                        recipe_level = 0,
+                        cooking_time = ""
+                    )
                 )
             }
         }
@@ -61,12 +74,11 @@ fun StoryResponseDto.toStoryResponseModel(): StoryResponseModel {
     )
 }
 
-
 data class DialogState(
     val data: StoryResponseModel = StoryResponseModel(
         recipe_id = 0,
         recipe_image = "",
-        recipe_owner = StoryResponseModel.RecipeOwner(
+        recipe_owner = RecipeOwner(
             recipe_owner_image = "",
             recipe_owner_name = "",
             recipe_owner_address = ""

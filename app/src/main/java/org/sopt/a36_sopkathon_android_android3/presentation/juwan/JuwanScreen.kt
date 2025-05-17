@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.a36_sopkathon_android_android3.R
+import org.sopt.a36_sopkathon_android_android3.core.ext.noRippleClickable
 import org.sopt.a36_sopkathon_android_android3.presentation.juwan.component.HomeCardView
 import org.sopt.a36_sopkathon_android_android3.presentation.juwan.component.HomeTopBar
 import org.sopt.a36_sopkathon_android_android3.presentation.juwan.component.SearchBar
@@ -26,10 +27,12 @@ import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme.colors
 @Composable
 fun JuwanRoute(
     navigateToDongmin: () -> Unit,
+    navigateToScrap: () -> Unit,
 ) {
     val homeList = JuwanViewModel().homeList
     JuwanScreen(
         navigateToDongmin = navigateToDongmin,
+        navigateToScrap = navigateToScrap,
         homeList = homeList
     )
 }
@@ -37,6 +40,7 @@ fun JuwanRoute(
 @Composable
 private fun JuwanScreen(
     navigateToDongmin: () -> Unit,
+    navigateToScrap: () -> Unit,
     homeList: List<homeItem>,
     modifier: Modifier = Modifier,
 ) {
@@ -48,7 +52,7 @@ private fun JuwanScreen(
             .fillMaxSize()
 
     ) {
-        HomeTopBar()
+        HomeTopBar(onClick = navigateToScrap,)
         Spacer(modifier = Modifier.height(12.dp))
         Text(
             text = "오늘은 어느 마을의 맛을\n열어볼까요?",
@@ -64,7 +68,6 @@ private fun JuwanScreen(
             columns = GridCells.Fixed(3),
             modifier = modifier
                 .fillMaxSize()
-//                .weight(1f)
                 .padding(start = 15.dp, end = 15.dp),
             horizontalArrangement = Arrangement.spacedBy(11.dp),
             verticalArrangement = Arrangement.spacedBy(11.dp)
@@ -72,7 +75,8 @@ private fun JuwanScreen(
         ) {
             items(homeList.size) { index ->
                 HomeCardView(
-                    homeItem = homeList[index]
+                    homeItem = homeList[index],
+                    modifier = Modifier.noRippleClickable(navigateToDongmin)
                 )
             }
         }
@@ -104,7 +108,8 @@ private fun PreviewJuwanScreen() {
                     image = R.drawable.img_home_3
                 )
             ),
-            navigateToDongmin = {}
+            navigateToDongmin = {},
+            navigateToScrap = {}
         )
     }
 }

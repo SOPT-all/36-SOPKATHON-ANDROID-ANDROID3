@@ -17,11 +17,13 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.a36_sopkathon_android_android3.R
+import org.sopt.a36_sopkathon_android_android3.core.ext.noRippleClickable
 import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
 
 
 @Composable
 fun HomeTopBar(
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -42,7 +44,8 @@ fun HomeTopBar(
         )
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_hangari),
-            contentDescription = "Scrap Icon"
+            contentDescription = "Scrap Icon",
+            modifier = Modifier.noRippleClickable(onClick)
         )
 
     }
@@ -51,5 +54,5 @@ fun HomeTopBar(
 @Preview
 @Composable
 fun previewtopbar() {
-    HomeTopBar()
+    HomeTopBar(onClick = {})
 }
