@@ -70,8 +70,6 @@ private fun DongminScreen(
             onRetry = {
                 scope.launch {
                     isOpenDialog = false
-                    delay(1000)
-                    isOpenDialog = true
                 }
 
             },
@@ -114,14 +112,16 @@ private fun DongminScreen(
                 )
         )
 
-        Text(
-            text = "탭해서 특별한 레시피 보러가기",
-            modifier = Modifier
-                .clickable(
-                    onClick = navigateToMinseo
-                )
-                .padding(bottom = 20.dp)
-        )
+
+            Text(
+                text = if (!isOpenDialog) "탭해서 특별한 레시피 보러가기" else "",
+                modifier = Modifier
+                    .clickable(
+                        onClick = navigateToMinseo
+                    )
+                    .padding(bottom = 20.dp)
+            )
+
     }
 
 }
