@@ -20,7 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.sopt.a36_sopkathon_android_android3.presentation.component.TopBar
 import org.sopt.a36_sopkathon_android_android3.presentation.minseo.component.ScrapInfoSection
-import org.sopt.a36_sopkathon_android_android3.ui.theme._36SOPKATHONANDROIDANDROID3Theme
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
+
 
 @Composable
 fun MinseoRoute(
@@ -96,7 +97,7 @@ private fun MinseoScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewMinseoScreen() {
-    _36SOPKATHONANDROIDANDROID3Theme {
+    HaeMuraTheme{
         MinseoScreen(
             scrapList = listOf(
                 ScrapInfo(

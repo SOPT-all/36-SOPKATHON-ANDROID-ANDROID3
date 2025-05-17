@@ -5,7 +5,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.sopt.a36_sopkathon_android_android3.ui.theme._36SOPKATHONANDROIDANDROID3Theme
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
+
 
 @Composable
 fun JiwooRoute(
@@ -31,7 +32,7 @@ private fun JiwooScreen(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewJiwooScreen() {
-    _36SOPKATHONANDROIDANDROID3Theme {
+    HaeMuraTheme {
         JiwooScreen(
             navigateToJuwan = {}
         )

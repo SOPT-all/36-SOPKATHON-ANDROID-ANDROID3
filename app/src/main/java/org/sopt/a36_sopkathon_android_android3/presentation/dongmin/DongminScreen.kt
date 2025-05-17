@@ -51,7 +51,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.sopt.a36_sopkathon_android_android3.R
 import org.sopt.a36_sopkathon_android_android3.core.ext.noRippleClickable
-import org.sopt.a36_sopkathon_android_android3.ui.theme._36SOPKATHONANDROIDANDROID3Theme
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
 import java.lang.Math.PI
 import kotlin.math.sin
 
@@ -301,7 +301,7 @@ private fun StoryDialog(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewMinseoScreen() {
-    _36SOPKATHONANDROIDANDROID3Theme {
+    HaeMuraTheme {
         DongminScreen(
             navigateToMinseo = {},
             dialogState = DialogState()
