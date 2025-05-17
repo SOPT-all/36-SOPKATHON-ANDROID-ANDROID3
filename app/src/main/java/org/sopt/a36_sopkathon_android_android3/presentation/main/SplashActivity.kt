@@ -36,14 +36,15 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.sopt.a36_sopkathon_android_android3.R
-import org.sopt.a36_sopkathon_android_android3.ui.theme._36SOPKATHONANDROIDANDROID3Theme
+import org.sopt.a36_sopkathon_android_android3.ui.theme.HaeMuraTheme
+
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity(): ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            _36SOPKATHONANDROIDANDROID3Theme {
+            HaeMuraTheme {
                 SplashScreen(
                     onFinish =  {
                         startActivity(Intent(this@SplashActivity, MainActivity::class.java))
@@ -137,7 +138,7 @@ private fun SplashScreen(
 @Preview
 @Composable
 private fun SplashScreenPreview() {
-    _36SOPKATHONANDROIDANDROID3Theme {
+    HaeMuraTheme{
         SplashScreen(
             onFinish = {}
         )
